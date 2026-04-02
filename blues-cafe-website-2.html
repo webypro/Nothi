@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="description" content="The Blues Cafe & Rooftop — Damoh's finest pure veg rooftop dining. Indian, Chinese, Tandoor, Pizza, Café & Desserts. Open till 11 PM.">
+<title>The Blues Cafe & Rooftop — Damoh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   THE BLUES CAFE V4
+   Palette: Deep Navy · Midnight Blue · Warm Gold · Soft Cream
+   Vibe: Smooth Luxury · Premium · Cinematic
+   ═══════════════════════════════════════ */
+:root{
+  --navy:#05070f;
+  --navy2:#080c1a;
+  --navy3:#0d1225;
+  --navy4:#111830;
+  --blue:#162040;
+  --blue2:#1a2850;
+  --accent:#c8a84b;
+  --accent2:#e4c46a;
+  --accent3:#f5d980;
+  --sky:#4a90d9;
+  --sky2:#6aaee8;
+  --cream:#f0ead8;
+  --warm:#c8b898;
+  --muted:#6a7898;
+  --muted2:#8a96b8;
+  --white:#ffffff;
+  --border:rgba(100,130,200,.1);
+  --border2:rgba(200,168,75,.12);
+  --glow:rgba(74,144,217,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--navy);
+  color:var(--cream);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--sky),var(--accent));border-radius:3px;}
+
+/* ── SMOOTH PAGE TRANSITION ── */
+#page{opacity:0;transition:opacity .6s ease;}
+#page.show{opacity:1;}
+
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--navy);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  transition:opacity .8s ease,visibility .8s ease;
+}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none;}
+.l-ring{
+  width:64px;height:64px;border-radius:50%;
+  border:1px solid rgba(74,144,217,.2);
+  border-top:1px solid var(--sky2);
+  animation:spin 1.2s linear infinite;
+  position:relative;
+}
+.l-ring::after{
+  content:'';position:absolute;inset:6px;border-radius:50%;
+  border:1px solid rgba(200,168,75,.15);
+  border-bottom:1px solid var(--accent2);
+  animation:spin 1.8s linear infinite reverse;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.l-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:300;letter-spacing:.25em;
+  color:var(--cream);text-transform:uppercase;text-align:center;
+}
+.l-logo b{color:var(--accent2);font-weight:600;font-style:italic;}
+.l-bar{width:160px;height:1px;background:rgba(255,255,255,.06);overflow:hidden;}
+.l-fill{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--accent2));animation:lfill 2s ease forwards;}
+@keyframes lfill{to{width:100%;}}
+.l-sub{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  height:70px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 3.5rem;
+  transition:all .5s ease;
+}
+#nav.stuck{
+  background:rgba(5,7,15,.92);
+  backdrop-filter:blur(24px) saturate(1.5);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 4px 40px rgba(0,0,0,.3);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:.7rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:400;letter-spacing:.1em;color:var(--cream);
+}
+.nav-logo-icon{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--sky),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--navy);
+  flex-shrink:0;
+}
+.nav-logo em{color:var(--accent2);font-style:italic;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
+.nav-links a{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted2);transition:color .3s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--cream);}
+.nav-links a.active{color:var(--accent2);}
+.nav-right{display:flex;gap:.8rem;align-items:center;}
+.nav-pill{
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.42rem 1.1rem;border:1px solid var(--border);
+  color:var(--muted2);transition:all .3s;
+}
+.nav-pill:hover{border-color:var(--sky);color:var(--sky2);}
+.nav-btn{
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.45rem 1.3rem;
+  background:linear-gradient(135deg,var(--sky),#2a5fba);
+  color:var(--white);font-weight:600;
+  box-shadow:0 0 20px rgba(74,144,217,.25);
+  transition:all .3s;
+}
+.nav-btn:hover{box-shadow:0 0 30px rgba(74,144,217,.45);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:6px;z-index:900;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:all .35s;}
+.hamburger.x span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.x span:nth-child(2){opacity:0;}
+.hamburger.x span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* MOBILE DRAWER */
+.drawer{
+  position:fixed;inset:0;z-index:790;
+  background:var(--navy2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;
+  transform:translateX(100%);transition:transform .5s cubic-bezier(.77,0,.175,1);
+}
+.drawer.open{transform:none;}
+.drawer a{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:300;letter-spacing:.06em;
+  color:var(--cream);transition:color .25s;
+}
+.drawer a:hover{color:var(--accent2);}
+.drawer-line{width:1px;height:20px;background:var(--border);}
+.d-cta{
+  margin-top:.5rem;
+  background:linear-gradient(135deg,var(--sky),#2a5fba)!important;
+  color:var(--white)!important;
+  padding:.7rem 2.8rem;font-size:1rem!important;font-weight:600!important;
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;height:100svh;min-height:640px;
+  display:flex;align-items:center;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1920&q=90') center/cover no-repeat;
+  transform:scale(1.06);transition:transform 3s ease;
+}
+.hero-bg.in{transform:scale(1);}
+.hero-fog{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(105deg,rgba(5,7,15,.92) 0%,rgba(8,12,26,.75) 45%,rgba(8,12,26,.3) 75%,transparent 100%),
+    linear-gradient(to top,rgba(5,7,15,.98) 0%,transparent 45%);
+}
+/* animated blue shimmer overlay */
+.hero-shimmer{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 15% 60%,rgba(26,40,80,.5) 0%,transparent 70%);
+  animation:shimmerPulse 6s ease-in-out infinite;
+}
+@keyframes shimmerPulse{0%,100%{opacity:.6;}50%{opacity:1;}}
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.particle{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--sky2);opacity:0;
+  animation:floatUp var(--dur,8s) var(--delay,0s) ease-in infinite;
+}
+@keyframes floatUp{
+  0%{opacity:0;transform:translateY(0) translateX(0);}
+  20%{opacity:.6;}
+  80%{opacity:.3;}
+  100%{opacity:0;transform:translateY(-100vh) translateX(var(--dx,20px));}
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 3.5rem;max-width:820px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.7rem;
+  background:rgba(74,144,217,.1);
+  border:1px solid rgba(74,144,217,.25);
+  padding:.42rem 1.1rem;
+  font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--sky2);margin-bottom:1.6rem;
+  opacity:0;animation:slideUp .8s .5s forwards;
+  backdrop-filter:blur(8px);
+}
+.hero-tag .pulse{
+  width:6px;height:6px;border-radius:50%;background:var(--sky2);
+  box-shadow:0 0 8px var(--sky2);
+  animation:blink 2s ease-in-out infinite;
+}
+.hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,8.5vw,8.5rem);
+  font-weight:300;line-height:.9;letter-spacing:-.01em;
+  opacity:0;animation:slideUp .9s .7s forwards;
+}
+.hero-h1 .line1{display:block;color:var(--cream);}
+.hero-h1 .line2{display:block;font-style:italic;font-weight:300;color:var(--accent2);font-size:.65em;margin-top:.15em;}
+.hero-h1 .line3{
+  display:block;font-weight:600;font-size:.32em;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--sky2);margin-top:.5em;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+.hero-sub{
+  font-size:.88rem;line-height:1.8;color:var(--muted2);
+  margin-top:1.6rem;max-width:440px;
+  opacity:0;animation:slideUp .9s .9s forwards;
+}
+.hero-ctas{
+  display:flex;gap:1rem;margin-top:2.4rem;flex-wrap:wrap;
+  opacity:0;animation:slideUp .9s 1.1s forwards;
+}
+.btn-blue{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:linear-gradient(135deg,var(--sky),#2354ae);
+  color:var(--white);padding:.9rem 2.2rem;
+  font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  box-shadow:0 4px 30px rgba(74,144,217,.3);
+  transition:all .35s;
+}
+.btn-blue:hover{box-shadow:0 8px 40px rgba(74,144,217,.5);transform:translateY(-2px);}
+.btn-outline-blue{
+  display:inline-flex;align-items:center;gap:.55rem;
+  border:1px solid rgba(74,144,217,.35);color:var(--sky2);
+  padding:.9rem 2.2rem;
+  font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
+  transition:all .35s;background:rgba(74,144,217,.06);
+  backdrop-filter:blur(8px);
+}
+.btn-outline-blue:hover{border-color:var(--sky2);background:rgba(74,144,217,.12);}
+/* Right side info panel */
+.hero-panel{
+  position:absolute;right:3.5rem;top:50%;transform:translateY(-50%);
+  z-index:2;display:flex;flex-direction:column;gap:1rem;
+  opacity:0;animation:slideLeft .9s 1.3s forwards;
+}
+.hpill{
+  display:flex;align-items:center;gap:.7rem;
+  background:rgba(8,12,26,.75);backdrop-filter:blur(16px);
+  border:1px solid var(--border);
+  padding:.7rem 1.1rem;min-width:190px;
+}
+.hpill-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.hpill-dot.g{background:#4ade80;box-shadow:0 0 6px #4ade80;}
+.hpill-dot.b{background:var(--sky2);box-shadow:0 0 6px var(--sky2);}
+.hpill-dot.a{background:var(--accent2);box-shadow:0 0 6px var(--accent2);}
+.hpill-text{font-size:.65rem;color:var(--muted2);}
+.hpill-text b{display:block;color:var(--cream);font-size:.7rem;}
+.hero-scroll-cue{
+  position:absolute;bottom:2.5rem;left:3.5rem;z-index:2;
+  display:flex;align-items:center;gap:.8rem;cursor:pointer;
+  opacity:0;animation:fadeIn 1s 1.6s forwards;
+}
+.scroll-cue-line{width:40px;height:1px;background:linear-gradient(90deg,var(--sky),transparent);}
+.scroll-cue-text{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);}
+@keyframes slideUp{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:none;}}
+@keyframes slideLeft{from{opacity:0;transform:translateY(-50%) translateX(24px);}to{opacity:1;transform:translateY(-50%) translateX(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* ── MARQUEE ── */
+.marquee{
+  background:linear-gradient(90deg,var(--navy3),var(--blue),var(--navy3));
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:.7rem 0;overflow:hidden;position:relative;
+}
+.marquee::before,.marquee::after{
+  content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;
+}
+.marquee::before{left:0;background:linear-gradient(90deg,var(--navy3),transparent);}
+.marquee::after{right:0;background:linear-gradient(-90deg,var(--navy3),transparent);}
+.marq-inner{display:flex;white-space:nowrap;animation:marq 32s linear infinite;}
+.marq-inner span{
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted2);padding:0 2.5rem;
+}
+.marq-inner span.hi{color:var(--accent2);}
+.marq-inner span::after{content:'·';margin-left:2.5rem;color:var(--muted);}
+@keyframes marq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── SECTION UTILS ── */
+.section{padding:7rem 3.5rem;}
+.wrap{max-width:1260px;margin:0 auto;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--sky2);margin-bottom:1rem;
+}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--sky2);}
+.headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4.5vw,4rem);
+  font-weight:300;line-height:1.05;
+}
+.headline em{font-style:italic;color:var(--accent2);}
+.headline strong{font-weight:600;}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(38px);transition:opacity .85s ease,transform .85s ease;}
+.r.v{opacity:1;transform:none;}
+.rl{opacity:0;transform:translateX(-38px);transition:opacity .85s ease,transform .85s ease;}
+.rl.v{opacity:1;transform:none;}
+.rr{opacity:0;transform:translateX(38px);transition:opacity .85s ease,transform .85s ease;}
+.rr.v{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+
+/* ── STATS STRIP ── */
+.stats-strip{
+  background:var(--navy2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:0;
+}
+.stats-row{
+  max-width:1260px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.stat-cell{
+  padding:2.8rem 2rem;text-align:center;
+  border-right:1px solid var(--border);
+  position:relative;overflow:hidden;
+  transition:background .4s;cursor:default;
+}
+.stat-cell:last-child{border-right:none;}
+.stat-cell::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 100%,rgba(74,144,217,.08),transparent 70%);
+  opacity:0;transition:opacity .4s;
+}
+.stat-cell:hover::before{opacity:1;}
+.stat-cell:hover{background:rgba(22,32,64,.5);}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.2rem;font-weight:600;
+  background:linear-gradient(135deg,var(--sky2),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;display:block;
+}
+.stat-l{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:.5rem;}
+
+/* ── ABOUT ── */
+.about{background:var(--navy2);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-visual{position:relative;}
+.about-img-frame{
+  position:relative;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.about-img-frame img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 8s ease;filter:saturate(.85);}
+.about-img-frame:hover img{transform:scale(1.04);}
+/* glowing blue border effect */
+.about-img-frame::after{
+  content:'';position:absolute;inset:0;
+  box-shadow:inset 0 0 0 1px rgba(74,144,217,.2);
+  pointer-events:none;
+}
+.about-accent-card{
+  position:absolute;bottom:-2rem;right:-2rem;
+  background:linear-gradient(135deg,var(--navy3),var(--blue2));
+  border:1px solid var(--border2);
+  padding:1.5rem 1.8rem;min-width:160px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+.acard-n{
+  font-family:'Bebas Neue',sans-serif;font-size:3rem;
+  background:linear-gradient(135deg,var(--sky2),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;display:block;
+}
+.acard-l{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);margin-top:.3rem;}
+/* floating badge */
+.about-float-badge{
+  position:absolute;top:2rem;left:-1.5rem;
+  background:rgba(5,7,15,.85);backdrop-filter:blur(12px);
+  border:1px solid var(--border2);
+  padding:.8rem 1.2rem;display:flex;align-items:center;gap:.6rem;
+}
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 8px var(--accent2);}
+.badge-text{font-size:.62rem;color:var(--warm);}
+.about-body{}
+.about-body .headline{margin-bottom:1.5rem;}
+.about-desc{font-size:.92rem;line-height:1.9;color:var(--muted2);margin-bottom:2rem;}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;}
+.atag{
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.32rem .9rem;
+  border:1px solid var(--border);color:var(--muted2);
+  transition:all .3s;
+}
+.atag:hover{border-color:rgba(74,144,217,.3);color:var(--sky2);}
+.about-link{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sky2);border-bottom:1px solid rgba(74,144,217,.3);
+  padding-bottom:3px;transition:all .3s;
+}
+.about-link:hover{color:var(--accent2);border-color:rgba(200,168,75,.4);}
+.about-link span{transition:transform .3s;}
+.about-link:hover span{transform:translateX(5px);}
+
+/* ── ORDER HERO (Big CTA) ── */
+.order-section{
+  background:linear-gradient(135deg,var(--navy3) 0%,var(--blue) 50%,var(--navy3) 100%);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:6rem 3.5rem;position:relative;overflow:hidden;
+}
+.order-section::before{
+  content:'';position:absolute;
+  top:-50%;left:-20%;width:60%;height:200%;
+  background:radial-gradient(ellipse,rgba(74,144,217,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.order-section::after{
+  content:'';position:absolute;
+  top:-50%;right:-10%;width:40%;height:200%;
+  background:radial-gradient(ellipse,rgba(200,168,75,.04) 0%,transparent 70%);
+  pointer-events:none;
+}
+.order-inner{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:3rem;align-items:center;position:relative;z-index:1;}
+.order-text .headline{margin-bottom:1rem;}
+.order-text p{font-size:.88rem;color:var(--muted2);line-height:1.75;}
+.ocard{
+  background:rgba(5,7,15,.6);backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+  padding:2rem;display:flex;flex-direction:column;gap:1.1rem;
+  transition:border-color .4s,transform .4s,box-shadow .4s;
+  position:relative;overflow:hidden;
+}
+.ocard::before{
+  content:'';position:absolute;inset:0;opacity:0;transition:opacity .4s;
+}
+.ocard.sw::before{background:linear-gradient(135deg,rgba(252,128,25,.07),transparent);}
+.ocard.zm::before{background:linear-gradient(135deg,rgba(226,55,68,.07),transparent);}
+.ocard:hover{transform:translateY(-5px);border-color:rgba(74,144,217,.25);box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.ocard:hover::before{opacity:1;}
+.oc-logo{font-size:1.8rem;}
+.oc-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--cream);}
+.oc-sub{font-size:.75rem;color:var(--muted2);line-height:1.6;}
+.oc-btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+  padding:.7rem 1.5rem;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  transition:all .3s;align-self:flex-start;
+}
+.oc-btn.sw{background:#fc8019;color:#fff;}
+.oc-btn.sw:hover{background:#e8721a;box-shadow:0 4px 20px rgba(252,128,25,.3);}
+.oc-btn.zm{background:#e23744;color:#fff;}
+.oc-btn.zm:hover{background:#c82030;box-shadow:0 4px 20px rgba(226,55,68,.3);}
+
+/* ── MENU ── */
+.menu-sec{background:var(--navy);}
+.menu-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.5rem;}
+.msearch-box{
+  display:flex;align-items:center;gap:.7rem;
+  background:rgba(22,32,64,.5);border:1px solid var(--border);
+  padding:.6rem 1rem;min-width:280px;transition:border-color .3s;
+}
+.msearch-box:focus-within{border-color:rgba(74,144,217,.35);}
+.msearch-box span{color:var(--muted);font-size:.85rem;flex-shrink:0;}
+.msearch{
+  background:none;border:none;outline:none;
+  font-size:.84rem;color:var(--cream);font-family:'Plus Jakarta Sans',sans-serif;
+  width:100%;
+}
+.msearch::placeholder{color:var(--muted);}
+.mtabs{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.mtab{
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.42rem .9rem;
+  background:rgba(22,32,64,.4);border:1px solid var(--border);
+  color:var(--muted2);transition:all .25s;
+}
+.mtab:hover{border-color:rgba(74,144,217,.3);color:var(--sky2);}
+.mtab.on{
+  background:linear-gradient(135deg,rgba(74,144,217,.2),rgba(74,144,217,.05));
+  border-color:rgba(74,144,217,.4);color:var(--sky2);font-weight:600;
+}
+.mpanel{display:none;}
+.mpanel.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:0;animation:fadeIn .35s ease;}
+.mitem{
+  display:flex;justify-content:space-between;align-items:baseline;gap:.8rem;
+  padding:.95rem 1.3rem;
+  border-bottom:1px solid rgba(22,32,64,.8);
+  border-right:1px solid rgba(22,32,64,.8);
+  transition:background .25s;cursor:default;
+}
+.mitem:hover{background:rgba(22,32,64,.6);}
+.mi-name{font-size:.86rem;color:var(--warm);line-height:1.35;flex:1;}
+.mi-price{
+  font-family:'Bebas Neue',sans-serif;font-size:1.05rem;
+  color:var(--accent2);white-space:nowrap;flex-shrink:0;
+}
+.mno{display:none;grid-column:1/-1;padding:3rem;text-align:center;font-size:.9rem;color:var(--muted);}
+.menu-foot{
+  margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--muted);
+}
+.menu-foot::before{content:'✦';color:var(--accent2);}
+
+/* ── GALLERY ── */
+.gallery-sec{background:var(--navy2);padding-bottom:6rem;}
+.gfilter{display:flex;gap:.4rem;flex-wrap:wrap;margin:2rem 0 2.5rem;}
+.gfbtn{
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.4rem .95rem;background:transparent;border:1px solid var(--border);
+  color:var(--muted2);transition:all .25s;
+}
+.gfbtn:hover,.gfbtn.on{background:rgba(74,144,217,.12);border-color:rgba(74,144,217,.35);color:var(--sky2);}
+.ggrid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:195px;gap:.5rem;}
+.gi{overflow:hidden;position:relative;cursor:pointer;background:var(--navy3);}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease,filter .5s;filter:saturate(.6) brightness(.8);}
+.gi:hover img{transform:scale(1.08);filter:saturate(.9) brightness(.9);}
+.gi-over{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(5,7,15,.9) 0%,rgba(8,12,26,.3) 50%,transparent 100%);
+  opacity:0;transition:opacity .4s;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:1.1rem;
+}
+.gi:hover .gi-over{opacity:1;}
+/* Blue glow on hover */
+.gi::after{
+  content:'';position:absolute;inset:0;
+  box-shadow:inset 0 0 0 1px rgba(74,144,217,.0);
+  transition:box-shadow .4s;pointer-events:none;
+}
+.gi:hover::after{box-shadow:inset 0 0 0 1px rgba(74,144,217,.25);}
+.go-cat{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sky2);}
+.go-name{font-size:.88rem;color:#fff;margin-top:.1rem;}
+.gi-zoom{
+  position:absolute;top:.7rem;right:.7rem;width:28px;height:28px;
+  background:rgba(5,7,15,.7);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:var(--sky2);opacity:0;transition:opacity .3s;
+}
+.gi:hover .gi-zoom{opacity:1;}
+.gi.span2{grid-column:span 4;grid-row:span 2;}
+.gi.span1{grid-column:span 4;}
+.gi.span1w{grid-column:span 8;}
+
+/* LIGHTBOX */
+#lb{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(5,7,15,.97);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:all .35s;
+}
+#lb.open{opacity:1;visibility:visible;}
+#lb-img{max-width:92vw;max-height:86vh;object-fit:contain;box-shadow:0 0 0 1px var(--border);}
+.lb-close{position:absolute;top:1.5rem;right:1.5rem;width:40px;height:40px;background:rgba(22,32,64,.6);border:1px solid var(--border);border-radius:50%;color:var(--muted2);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;}
+.lb-close:hover{background:rgba(74,144,217,.2);color:var(--sky2);}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;background:rgba(22,32,64,.6);border:1px solid var(--border);border-radius:50%;color:var(--muted2);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;}
+.lb-nav:hover{background:rgba(74,144,217,.2);color:var(--sky2);}
+.lb-prev{left:1.5rem;}.lb-next{right:1.5rem;}
+.lb-cap{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:.72rem;color:var(--muted);white-space:nowrap;}
+
+/* ── ROOFTOP FEATURE ── */
+.rooftop{position:relative;height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.rt-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1800&q=85') center/cover no-repeat;}
+.rt-over{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(135deg,rgba(5,7,15,.8) 0%,rgba(8,12,26,.6) 50%,rgba(5,7,15,.75) 100%);
+}
+/* blue tint overlay */
+.rt-blue{
+  position:absolute;inset:0;
+  background:rgba(14,22,58,.35);
+  mix-blend-mode:multiply;
+}
+.rt-body{position:relative;z-index:2;text-align:center;padding:0 2rem;max-width:700px;}
+.neon-tag{
+  display:inline-block;
+  color:var(--sky2);border:1px solid rgba(74,144,217,.35);
+  padding:.38rem 1.2rem;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;
+  box-shadow:0 0 20px rgba(74,144,217,.12),inset 0 0 20px rgba(74,144,217,.05);
+  margin-bottom:1.6rem;
+  animation:neonPulse 3s ease-in-out infinite;
+}
+@keyframes neonPulse{0%,100%{box-shadow:0 0 20px rgba(74,144,217,.12),inset 0 0 20px rgba(74,144,217,.05);}50%{box-shadow:0 0 30px rgba(74,144,217,.25),inset 0 0 20px rgba(74,144,217,.1);}}
+.rt-h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,5vw,4.5rem);font-weight:300;line-height:1.05;
+  color:var(--cream);margin-bottom:1rem;
+}
+.rt-h2 em{font-style:italic;color:var(--accent2);}
+.rt-p{font-size:.9rem;color:var(--muted2);line-height:1.78;margin-bottom:2rem;}
+
+/* ── REVIEWS ── */
+.reviews-sec{background:var(--navy);}
+.reviews-hdr{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;margin-bottom:3.5rem;}
+.gscore{
+  display:flex;align-items:center;gap:1.2rem;
+  background:rgba(22,32,64,.4);border:1px solid var(--border);
+  padding:1.3rem 1.8rem;
+}
+.g-logo{width:36px;height:36px;background:url('https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg') center/contain no-repeat;flex-shrink:0;}
+.g-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--cream);line-height:1;}
+.g-stars{color:#f4b400;font-size:.95rem;letter-spacing:2px;}
+.g-lbl{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.rcard{
+  padding:1.7rem;
+  background:rgba(8,12,26,.7);
+  border:1px solid var(--border);
+  transition:border-color .4s,transform .4s,box-shadow .4s;
+  position:relative;overflow:hidden;
+}
+.rcard::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at top right,rgba(74,144,217,.05),transparent 60%);
+  opacity:0;transition:opacity .4s;
+}
+.rcard:hover::before{opacity:1;}
+.rcard:hover{border-color:rgba(74,144,217,.2);transform:translateY(-4px);box-shadow:0 16px 50px rgba(0,0,0,.35);}
+.r-top{display:flex;align-items:center;gap:.85rem;margin-bottom:1rem;}
+.rav{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#fff;flex-shrink:0;}
+.rname{font-size:.87rem;font-weight:500;color:var(--cream);}
+.rdate{font-size:.6rem;color:var(--muted);margin-top:.1rem;}
+.r-stars{color:#f4b400;font-size:.8rem;letter-spacing:1px;margin-bottom:.6rem;}
+.r-text{font-size:.84rem;line-height:1.76;color:var(--muted2);}
+.r-badge{margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--border);display:flex;align-items:center;gap:.4rem;font-size:.6rem;color:var(--muted);}
+.r-dot{width:6px;height:6px;border-radius:50%;background:#4285f4;flex-shrink:0;}
+.review-write{text-align:center;margin-top:3rem;}
+.review-write a{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:.85rem 2.2rem;
+  background:rgba(22,32,64,.5);border:1px solid var(--border);
+  color:var(--muted2);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  transition:all .35s;
+}
+.review-write a:hover{border-color:rgba(74,144,217,.35);color:var(--sky2);background:rgba(22,32,64,.8);}
+
+/* ── CONTACT ── */
+.contact-sec{background:var(--navy2);}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+.contact-sec .headline{margin-bottom:2.5rem;}
+.irow{display:flex;gap:1.2rem;margin-bottom:1.8rem;align-items:flex-start;}
+.i-ico{
+  width:44px;height:44px;
+  background:rgba(22,32,64,.5);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;
+}
+.i-body strong{display:block;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sky2);margin-bottom:.35rem;}
+.i-body p,.i-body a{font-size:.86rem;color:var(--muted2);line-height:1.65;}
+.i-body a:hover{color:var(--accent2);}
+.contact-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:2rem;}
+.c-link{
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.48rem 1.1rem;border:1px solid var(--border);color:var(--muted2);
+  transition:all .3s;display:flex;align-items:center;gap:.35rem;
+}
+.c-link:hover{border-color:rgba(74,144,217,.3);color:var(--sky2);}
+.map-box{border:1px solid var(--border);overflow:hidden;}
+.map-box iframe{width:100%;height:330px;border:none;display:block;filter:grayscale(.5) brightness(.75) saturate(.5);}
+.map-bar{background:rgba(8,12,26,.8);padding:1rem 1.3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;border-top:1px solid var(--border);}
+.map-bar span{font-size:.7rem;color:var(--muted2);}
+.map-bar span b{color:var(--cream);}
+.map-dir{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.42rem 1rem;background:linear-gradient(135deg,var(--sky),#2354ae);color:#fff;transition:all .3s;}
+.map-dir:hover{box-shadow:0 4px 20px rgba(74,144,217,.3);}
+
+/* ── FOOTER ── */
+footer{background:#030509;padding:4.5rem 3.5rem 2.5rem;border-top:1px solid var(--border);}
+.footer-grid{
+  max-width:1260px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;
+  padding-bottom:3rem;border-bottom:1px solid var(--border);
+}
+.footer-brand .nav-logo{margin-bottom:1rem;font-size:1.3rem;}
+.footer-brand p{font-size:.8rem;color:var(--muted);line-height:1.75;max-width:240px;}
+.footer-col h4{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky2);margin-bottom:1.2rem;}
+.footer-col a,.footer-col p{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.55rem;transition:color .25s;}
+.footer-col a:hover{color:var(--cream);}
+.footer-bottom{max-width:1260px;margin:0 auto;padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.62rem;color:rgba(106,120,152,.4);}
+.footer-neon{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky2);opacity:.7;}
+
+/* FLOATING WA */
+.wa{
+  position:fixed;bottom:1.8rem;right:1.8rem;z-index:700;
+  width:52px;height:52px;background:#25d366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 24px rgba(37,211,102,.35);
+  transition:transform .3s,box-shadow .3s;
+  opacity:0;animation:fadeIn .5s 2.5s forwards;
+}
+.wa:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(37,211,102,.5);}
+.wa svg{width:26px;height:26px;fill:#fff;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  #nav{padding:0 2rem;}
+  .section{padding:5.5rem 2rem;}
+  .order-section{padding:5rem 2rem;}
+  footer{padding:3.5rem 2rem 2rem;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .order-inner{grid-template-columns:1fr 1fr;gap:2rem;}
+  .order-text{grid-column:1/-1;}
+}
+@media(max-width:900px){
+  .nav-links,.nav-right{display:none;}
+  .hamburger{display:flex;}
+  .hero-content{padding:0 1.8rem;}
+  .hero-panel{display:none;}
+  .hero-scroll-cue{left:1.8rem;}
+  .about-grid{grid-template-columns:1fr;gap:4rem;}
+  .about-accent-card{right:0;bottom:-1.5rem;}
+  .about-float-badge{display:none;}
+  .rgrid{grid-template-columns:1fr;}
+  .cgrid{grid-template-columns:1fr;gap:3rem;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .stat-cell:nth-child(2){border-right:none;}
+  .ggrid{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px;}
+  .gi.span2{grid-column:span 2;grid-row:span 1;}
+  .gi.span1{grid-column:span 1;}
+  .gi.span1w{grid-column:span 2;}
+  .rooftop{height:400px;}
+  .hero-h1{font-size:3rem;}
+}
+@media(max-width:600px){
+  .section{padding:4rem 1.2rem;}
+  .hero-content{padding:0 1.2rem;}
+  .hero-h1{font-size:2.6rem;}
+  .hero-sub{display:none;}
+  .hero-ctas{flex-direction:column;align-items:flex-start;}
+  .btn-blue,.btn-outline-blue{width:100%;max-width:280px;justify-content:center;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .ggrid{grid-template-columns:1fr 1fr;grid-auto-rows:140px;}
+  .mpanel.on{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .order-inner{grid-template-columns:1fr;}
+  .msearch-box{min-width:unset;width:100%;}
+  .menu-top{flex-direction:column;align-items:flex-start;}
+  .rooftop{height:360px;}
+}
+</style>
+</head>
+<body>
+<div id="page">
+
+<!-- PARTICLES -->
+<div class="hero-particles" id="particles"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="l-ring"></div>
+  <div class="l-logo">The <b>Blues</b> Cafe</div>
+  <div class="l-bar"><div class="l-fill"></div></div>
+  <div class="l-sub">Damoh's Finest Rooftop · Since 2024</div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button class="lb-nav lb-prev" onclick="lbGo(-1)">&#8592;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-nav lb-next" onclick="lbGo(1)">&#8594;</button>
+  <button class="lb-close" onclick="lbClose()">&#10005;</button>
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="drawer">
+  <a href="#about" onclick="closeDrawer()">About</a>
+  <div class="drawer-line"></div>
+  <a href="#menu" onclick="closeDrawer()">Menu</a>
+  <div class="drawer-line"></div>
+  <a href="#gallery" onclick="closeDrawer()">Gallery</a>
+  <div class="drawer-line"></div>
+  <a href="#reviews" onclick="closeDrawer()">Reviews</a>
+  <div class="drawer-line"></div>
+  <a href="#contact" onclick="closeDrawer()">Contact</a>
+  <a href="tel:09202892954" class="d-cta">📞 Call Now</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">B</div>
+    The <em>&nbsp;Blues&nbsp;</em> Cafe'
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:09202892954" class="nav-pill">092028 92954</a>
+    <a href="#order" class="nav-btn">Order Now</a>
+  </div>
+  <div class="hamburger" id="ham" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-fog"></div>
+  <div class="hero-shimmer"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="pulse"></span>
+      Pure Veg &nbsp;·&nbsp; Rooftop Dining &nbsp;·&nbsp; Damoh, MP
+    </div>
+    <h1 class="hero-h1">
+      <span class="line1">The Blues</span>
+      <span class="line2">Cafe & Rooftop</span>
+      <span class="line3">Where the Sky Meets the Blues</span>
+    </h1>
+    <p class="hero-sub">Damoh's finest rooftop dining — bold Indian flavours, Chinese, Tandoor, café beverages and artful desserts under the open sky.</p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-blue">Explore Menu →</a>
+      <a href="#order" class="btn-outline-blue">Order Online</a>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <div class="hpill">
+      <span class="hpill-dot g"></span>
+      <div class="hpill-text"><b>Open Now</b>Closes at 11:00 PM</div>
+    </div>
+    <div class="hpill">
+      <span class="hpill-dot b"></span>
+      <div class="hpill-text"><b>100% Pure Veg</b>Multi Cuisine</div>
+    </div>
+    <div class="hpill">
+      <span class="hpill-dot a"></span>
+      <div class="hpill-text"><b>₹1 – ₹200</b>Per Person</div>
+    </div>
+    <div class="hpill">
+      <span class="hpill-dot b"></span>
+      <div class="hpill-text"><b>4.0 ★ Google</b>Damoh's Favourite</div>
+    </div>
+  </div>
+  <div class="hero-scroll-cue" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-cue-line"></div>
+    <div class="scroll-cue-text">Scroll to discover</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marq-inner">
+    <span class="hi">Rolls</span><span>Sizzlers</span><span class="hi">Tandoor</span><span>Cold Coffee</span>
+    <span class="hi">Waffles</span><span>Paneer Kulcha</span><span class="hi">Maggi</span><span>Pasta</span>
+    <span class="hi">Pizza</span><span>South Indian</span><span class="hi">Rooftop Dining</span><span>Brownies</span>
+    <span class="hi">Shakes</span><span>Chinese</span><span class="hi">Burgers</span><span>Frappes</span>
+    <span class="hi">Rolls</span><span>Sizzlers</span><span class="hi">Tandoor</span><span>Cold Coffee</span>
+    <span class="hi">Waffles</span><span>Paneer Kulcha</span><span class="hi">Maggi</span><span>Pasta</span>
+    <span class="hi">Pizza</span><span>South Indian</span><span class="hi">Rooftop Dining</span><span>Brownies</span>
+    <span class="hi">Shakes</span><span>Chinese</span><span class="hi">Burgers</span><span>Frappes</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-row">
+    <div class="stat-cell r"><span class="stat-n">100+</span><div class="stat-l">Menu Items</div></div>
+    <div class="stat-cell r d1"><span class="stat-n">4.0★</span><div class="stat-l">Google Rating</div></div>
+    <div class="stat-cell r d2"><span class="stat-n">11pm</span><div class="stat-l">Open Until</div></div>
+    <div class="stat-cell r d3"><span class="stat-n">₹200</span><div class="stat-l">Avg / Person</div></div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about section" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-visual rl">
+        <div class="about-img-frame">
+          <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=900&q=85" alt="The Blues Cafe Rooftop" loading="lazy">
+        </div>
+        <div class="about-float-badge">
+          <div class="badge-dot"></div>
+          <div class="badge-text">Pure Veg · Rooftop · Damoh</div>
+        </div>
+        <div class="about-accent-card">
+          <span class="acard-n">4.0★</span>
+          <div class="acard-l">Google Rating</div>
+        </div>
+      </div>
+      <div class="about-body rr">
+        <div class="eyebrow">Our Story</div>
+        <h2 class="headline">This Is Our<br><em>Happy Place</em></h2>
+        <p class="about-desc">
+          Nestled above the city of Damoh on a breathtaking open rooftop, <strong style="color:var(--cream)">The Blues Cafe</strong> is where great food meets open skies and cinematic neon ambiance.<br><br>
+          We serve 100% pure vegetarian multi-cuisine meals — sizzling Indian curries, authentic Chinese, wood-fired pizzas, indulgent waffles, and barista-style café beverages. Every dish is crafted with care and plated beautifully.
+        </p>
+        <div class="about-tags">
+          <span class="atag">☑ Pure Veg</span>
+          <span class="atag">🏙 Rooftop</span>
+          <span class="atag">🍕 Multi Cuisine</span>
+          <span class="atag">🥢 Chinese</span>
+          <span class="atag">🔥 Tandoor</span>
+          <span class="atag">☕ Café</span>
+          <span class="atag">🧇 Desserts</span>
+        </div>
+        <a href="#menu" class="about-link">Browse Full Menu <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ORDER ═══ -->
+<div class="order-section" id="order">
+  <div class="order-inner wrap">
+    <div class="order-text rl">
+      <div class="eyebrow">Home Delivery</div>
+      <h2 class="headline">Order <em>Online</em><br>Right Now</h2>
+      <p>Fresh from our rooftop kitchen to your door — available on Swiggy & Zomato across Damoh.</p>
+    </div>
+    <div class="ocard sw r d1">
+      <div class="oc-logo">🛵</div>
+      <div class="oc-name">Swiggy</div>
+      <div class="oc-sub">Fast delivery · Live tracking · Exclusive offers</div>
+      <a href="https://www.swiggy.com/city/damoh/the-blues-cafe-and-rooftop-vijay-nagar-rest1212108" target="_blank" class="oc-btn sw">Order on Swiggy →</a>
+    </div>
+    <div class="ocard zm r d2">
+      <div class="oc-logo">🍽️</div>
+      <div class="oc-name">Zomato</div>
+      <div class="oc-sub">Full menu · Reviews · Easy reorder</div>
+      <a href="https://www.zomato.com/damoh/the-blues-cafe-rooftop-damoh-locality" target="_blank" class="oc-btn zm">Order on Zomato →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MENU ═══ -->
+<section class="menu-sec section" id="menu">
+  <div class="wrap">
+    <div class="menu-top r">
+      <div>
+        <div class="eyebrow">What We Serve</div>
+        <h2 class="headline">Our <em>Menu</em></h2>
+      </div>
+      <div class="msearch-box">
+        <span>🔍</span>
+        <input class="msearch" id="msearch" type="text" placeholder="Search any dish…" oninput="menuSearch(this.value)">
+      </div>
+    </div>
+    <div class="mtabs" id="mtabs">
+      <button class="mtab on" onclick="mTab(this,'p-rolls')">Rolls</button>
+      <button class="mtab" onclick="mTab(this,'p-sizzlers')">Sizzlers</button>
+      <button class="mtab" onclick="mTab(this,'p-maggi')">Maggi</button>
+      <button class="mtab" onclick="mTab(this,'p-indian')">Indian</button>
+      <button class="mtab" onclick="mTab(this,'p-mains')">Mains</button>
+      <button class="mtab" onclick="mTab(this,'p-rice')">Rice</button>
+      <button class="mtab" onclick="mTab(this,'p-starters')">Starters</button>
+      <button class="mtab" onclick="mTab(this,'p-noodles')">Noodles</button>
+      <button class="mtab" onclick="mTab(this,'p-south')">South Indian</button>
+      <button class="mtab" onclick="mTab(this,'p-pizza')">Pizza</button>
+      <button class="mtab" onclick="mTab(this,'p-burger')">Burger</button>
+      <button class="mtab" onclick="mTab(this,'p-pasta')">Pasta</button>
+      <button class="mtab" onclick="mTab(this,'p-sides')">Sides & Soups</button>
+      <button class="mtab" onclick="mTab(this,'p-drinks')">Drinks</button>
+      <button class="mtab" onclick="mTab(this,'p-desserts')">Desserts</button>
+    </div>
+
+    <div class="mpanel on" id="p-rolls">
+      <div class="mitem"><span class="mi-name">Cheese Aloo Roll</span><span class="mi-price">₹79</span></div>
+      <div class="mitem"><span class="mi-name">Veggie Roll</span><span class="mi-price">₹89</span></div>
+      <div class="mitem"><span class="mi-name">Tandoori Aloo Roll</span><span class="mi-price">₹89</span></div>
+      <div class="mitem"><span class="mi-name">Soya Chap Roll</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">Noodle Roll</span><span class="mi-price">₹109</span></div>
+      <div class="mitem"><span class="mi-name">Chilli Paneer Roll</span><span class="mi-price">₹129</span></div>
+      <div class="mitem"><span class="mi-name">Manchurian Roll</span><span class="mi-price">₹119</span></div>
+    </div>
+    <div class="mpanel" id="p-sizzlers">
+      <div class="mitem"><span class="mi-name">Maggie Sizzler</span><span class="mi-price">₹250</span></div>
+      <div class="mitem"><span class="mi-name">Chinese Topping Sizzler</span><span class="mi-price">₹300</span></div>
+      <div class="mitem"><span class="mi-name">Chili Paneer Sizzler</span><span class="mi-price">₹250</span></div>
+      <div class="mitem"><span class="mi-name">Manchurian Sizzler</span><span class="mi-price">₹250</span></div>
+    </div>
+    <div class="mpanel" id="p-maggi">
+      <div class="mitem"><span class="mi-name">Masala Maggi</span><span class="mi-price">₹69</span></div>
+      <div class="mitem"><span class="mi-name">Tandoori Maggi</span><span class="mi-price">₹89</span></div>
+      <div class="mitem"><span class="mi-name">Masala Vegetable Maggi</span><span class="mi-price">₹79</span></div>
+      <div class="mitem"><span class="mi-name">Cheese Maggi</span><span class="mi-price">₹109</span></div>
+      <div class="mitem"><span class="mi-name">Korean Chilli Maggi</span><span class="mi-price">₹119</span></div>
+    </div>
+    <div class="mpanel" id="p-indian">
+      <div class="mitem"><span class="mi-name">Dal Makhani–Paneer Kulcha Combo</span><span class="mi-price">₹170</span></div>
+      <div class="mitem"><span class="mi-name">Dal Makhani–Butter Naan Combo</span><span class="mi-price">₹150</span></div>
+      <div class="mitem"><span class="mi-name">Rajma–Paneer Kulcha Combo</span><span class="mi-price">₹150</span></div>
+      <div class="mitem"><span class="mi-name">Chole–Amritsari Kulcha</span><span class="mi-price">₹150</span></div>
+      <div class="mitem"><span class="mi-name">Butter Paneer & Amritsari Kulcha</span><span class="mi-price">₹180</span></div>
+      <div class="mitem"><span class="mi-name">Dal Makhani with Amritsari Kulcha</span><span class="mi-price">₹160</span></div>
+      <div class="mitem"><span class="mi-name">Rajma Kulcha</span><span class="mi-price">₹120</span></div>
+      <div class="mitem"><span class="mi-name">Chole Kulcha</span><span class="mi-price">₹120</span></div>
+      <div class="mitem"><span class="mi-name">Chole Lachha Paratha</span><span class="mi-price">₹140</span></div>
+      <div class="mitem"><span class="mi-name">Rajma Lachha Paratha</span><span class="mi-price">₹140</span></div>
+      <div class="mitem"><span class="mi-name">Kadai Paneer Kulcha</span><span class="mi-price">₹150</span></div>
+      <div class="mitem"><span class="mi-name">Kadai Paneer Lachha Paratha</span><span class="mi-price">₹170</span></div>
+      <div class="mitem"><span class="mi-name">Chole Bhatura (2 pc)</span><span class="mi-price">₹130</span></div>
+      <div class="mitem"><span class="mi-name">Dal Makhani Kulcha</span><span class="mi-price">₹130</span></div>
+      <div class="mitem"><span class="mi-name">Mix Veg Lachha Paratha</span><span class="mi-price">₹140</span></div>
+      <div class="mitem"><span class="mi-name">Mix Veg Kulcha</span><span class="mi-price">₹130</span></div>
+      <div class="mitem"><span class="mi-name">Extra Kulcha</span><span class="mi-price">₹40</span></div>
+      <div class="mitem"><span class="mi-name">Extra Amritsari Kulcha</span><span class="mi-price">₹60</span></div>
+      <div class="mitem"><span class="mi-name">Butter Naan</span><span class="mi-price">₹45</span></div>
+      <div class="mitem"><span class="mi-name">Plain Naan</span><span class="mi-price">₹35</span></div>
+      <div class="mitem"><span class="mi-name">Garlic Naan</span><span class="mi-price">₹60</span></div>
+      <div class="mitem"><span class="mi-name">Lachha Paratha</span><span class="mi-price">₹30</span></div>
+    </div>
+    <div class="mpanel" id="p-mains">
+      <div class="mitem"><span class="mi-name">Paneer Butter Masala</span><span class="mi-price">₹170</span></div>
+      <div class="mitem"><span class="mi-name">Kadai Paneer</span><span class="mi-price">₹190</span></div>
+      <div class="mitem"><span class="mi-name">Dal Fry</span><span class="mi-price">₹120</span></div>
+      <div class="mitem"><span class="mi-name">Dal Tadka</span><span class="mi-price">₹130</span></div>
+      <div class="mitem"><span class="mi-name">Dal Makhni</span><span class="mi-price">₹150</span></div>
+      <div class="mitem"><span class="mi-name">Rajma</span><span class="mi-price">₹130</span></div>
+      <div class="mitem"><span class="mi-name">Chole</span><span class="mi-price">₹100</span></div>
+      <div class="mitem"><span class="mi-name">Mix Veg</span><span class="mi-price">₹130</span></div>
+    </div>
+    <div class="mpanel" id="p-rice">
+      <div class="mitem"><span class="mi-name">Rajma Rice Combo</span><span class="mi-price">₹120</span></div>
+      <div class="mitem"><span class="mi-name">Chole Rice Combo</span><span class="mi-price">₹120</span></div>
+      <div class="mitem"><span class="mi-name">Dal Fry Rice Combo</span><span class="mi-price">₹100</span></div>
+      <div class="mitem"><span class="mi-name">Dal Makhni Rice Combo</span><span class="mi-price">₹130</span></div>
+      <div class="mitem"><span class="mi-name">Veg Fried Rice</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">Schezwan Fried Rice</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Manchurian Rice</span><span class="mi-price">₹129</span></div>
+      <div class="mitem"><span class="mi-name">Paneer Rice</span><span class="mi-price">₹149</span></div>
+      <div class="mitem"><span class="mi-name">Veg Biryani</span><span class="mi-price">₹159</span></div>
+      <div class="mitem"><span class="mi-name">Jeera Rice</span><span class="mi-price">₹139</span></div>
+      <div class="mitem"><span class="mi-name">Burned Garlic Rice</span><span class="mi-price">₹139</span></div>
+    </div>
+    <div class="mpanel" id="p-starters">
+      <div class="mitem"><span class="mi-name">Chilli Potato</span><span class="mi-price">₹140</span></div>
+      <div class="mitem"><span class="mi-name">Honey Chilli Potato</span><span class="mi-price">₹150</span></div>
+      <div class="mitem"><span class="mi-name">Manchurian Dry / Gravy</span><span class="mi-price">₹140/150</span></div>
+      <div class="mitem"><span class="mi-name">Paneer Pattaya</span><span class="mi-price">₹250</span></div>
+      <div class="mitem"><span class="mi-name">Paneer Schazano</span><span class="mi-price">₹250</span></div>
+      <div class="mitem"><span class="mi-name">Chilli Paneer Dry / Gravy</span><span class="mi-price">₹170/180</span></div>
+      <div class="mitem"><span class="mi-name">Paneer 65</span><span class="mi-price">₹180</span></div>
+      <div class="mitem"><span class="mi-name">Veg Kothe</span><span class="mi-price">₹170</span></div>
+    </div>
+    <div class="mpanel" id="p-noodles">
+      <div class="mitem"><span class="mi-name">Hakka Noodles</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">Veg Chowmein</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">Schezwan Noodles</span><span class="mi-price">₹109</span></div>
+      <div class="mitem"><span class="mi-name">Burn Garlic Noodles</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Manchurian Noodles</span><span class="mi-price">₹129</span></div>
+      <div class="mitem"><span class="mi-name">Paneer Noodles</span><span class="mi-price">₹149</span></div>
+      <div class="mitem"><span class="mi-name">Singapuri Noodles</span><span class="mi-price">₹129</span></div>
+    </div>
+    <div class="mpanel" id="p-south">
+      <div class="mitem"><span class="mi-name">Plain Dosa</span><span class="mi-price">₹79</span></div>
+      <div class="mitem"><span class="mi-name">Masala Dosa</span><span class="mi-price">₹89</span></div>
+      <div class="mitem"><span class="mi-name">Onion Dosa</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">Paper Masala Dosa</span><span class="mi-price">₹129</span></div>
+      <div class="mitem"><span class="mi-name">Mysore Masala Dosa</span><span class="mi-price">₹129</span></div>
+      <div class="mitem"><span class="mi-name">Paneer Dosa</span><span class="mi-price">₹139</span></div>
+      <div class="mitem"><span class="mi-name">Cheese Paneer Dosa</span><span class="mi-price">₹149</span></div>
+      <div class="mitem"><span class="mi-name">Plain Uttapam</span><span class="mi-price">₹79</span></div>
+      <div class="mitem"><span class="mi-name">Onion Uttapam</span><span class="mi-price">₹89</span></div>
+      <div class="mitem"><span class="mi-name">Tomato Uttapam</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">Veg Uttapam</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">Paneer Uttapam</span><span class="mi-price">₹129</span></div>
+    </div>
+    <div class="mpanel" id="p-pizza">
+      <div class="mitem"><span class="mi-name">Margherita Pizza</span><span class="mi-price">₹130</span></div>
+      <div class="mitem"><span class="mi-name">Corn Cheese Pizza</span><span class="mi-price">₹140</span></div>
+      <div class="mitem"><span class="mi-name">Farmhouse Pizza</span><span class="mi-price">₹160</span></div>
+      <div class="mitem"><span class="mi-name">Tandoori Paneer Pizza</span><span class="mi-price">₹180</span></div>
+      <div class="mitem"><span class="mi-name">Classic Garlic Bread</span><span class="mi-price">₹100</span></div>
+      <div class="mitem"><span class="mi-name">Stuffed Garlic Bread</span><span class="mi-price">₹150</span></div>
+    </div>
+    <div class="mpanel" id="p-burger">
+      <div class="mitem"><span class="mi-name">Krispy Veg Burger</span><span class="mi-price">₹79</span></div>
+      <div class="mitem"><span class="mi-name">Classic Cheese Burger</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">King Size Delight</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Paneer Burger</span><span class="mi-price">₹109</span></div>
+    </div>
+    <div class="mpanel" id="p-pasta">
+      <div class="mitem"><span class="mi-name">Szechuan Pasta</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Peri Peri Pasta</span><span class="mi-price">₹149</span></div>
+      <div class="mitem"><span class="mi-name">White Sauce Pasta</span><span class="mi-price">₹169</span></div>
+      <div class="mitem"><span class="mi-name">Red Sauce Pasta</span><span class="mi-price">₹169</span></div>
+    </div>
+    <div class="mpanel" id="p-sides">
+      <div class="mitem"><span class="mi-name">Salted Fries</span><span class="mi-price">₹80</span></div>
+      <div class="mitem"><span class="mi-name">Herb & Spice Fries</span><span class="mi-price">₹90</span></div>
+      <div class="mitem"><span class="mi-name">Cheese Loaded Fries</span><span class="mi-price">₹110</span></div>
+      <div class="mitem"><span class="mi-name">Herb & Spice Wedges</span><span class="mi-price">₹100</span></div>
+      <div class="mitem"><span class="mi-name">Cheese Loaded Wedges</span><span class="mi-price">₹120</span></div>
+      <div class="mitem"><span class="mi-name">Authentic Mexican Nachos</span><span class="mi-price">₹70</span></div>
+      <div class="mitem"><span class="mi-name">Cheese Loaded Nachos</span><span class="mi-price">₹90</span></div>
+      <div class="mitem"><span class="mi-name">Tomato Soup</span><span class="mi-price">₹79</span></div>
+      <div class="mitem"><span class="mi-name">Manchow Soup</span><span class="mi-price">₹69</span></div>
+      <div class="mitem"><span class="mi-name">Hot N Sour Soup</span><span class="mi-price">₹69</span></div>
+      <div class="mitem"><span class="mi-name">Veg Sweet Corn Soup</span><span class="mi-price">₹69</span></div>
+      <div class="mitem"><span class="mi-name">Veg Lemon Coriander Soup</span><span class="mi-price">₹69</span></div>
+    </div>
+    <div class="mpanel" id="p-drinks">
+      <div class="mitem"><span class="mi-name">Cold Coffee Reg / Strong</span><span class="mi-price">₹79/89</span></div>
+      <div class="mitem"><span class="mi-name">Hazelnut Cold Coffee</span><span class="mi-price">₹109</span></div>
+      <div class="mitem"><span class="mi-name">Butterscotch Cold Coffee</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Caramel Cold Coffee</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Malt and Mocha</span><span class="mi-price">₹139</span></div>
+      <div class="mitem"><span class="mi-name">Hot Coffee</span><span class="mi-price">₹30</span></div>
+      <div class="mitem"><span class="mi-name">Chocolate Coffee</span><span class="mi-price">₹59</span></div>
+      <div class="mitem"><span class="mi-name">Café Latte</span><span class="mi-price">₹69</span></div>
+      <div class="mitem"><span class="mi-name">Caramel Latte</span><span class="mi-price">₹99</span></div>
+      <div class="mitem"><span class="mi-name">Hot Chocolate</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Oreo Shake</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Kit Kat Shake</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Blueberry Shake</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Brownie Shake</span><span class="mi-price">₹129</span></div>
+      <div class="mitem"><span class="mi-name">Butterscotch Shake</span><span class="mi-price">₹119</span></div>
+      <div class="mitem"><span class="mi-name">Pineapple Shake</span><span class="mi-price">₹109</span></div>
+      <div class="mitem"><span class="mi-name">Strawberry Shake</span><span class="mi-price">₹109</span></div>
+      <div class="mitem"><span class="mi-name">Paan Italian Cola</span><span class="mi-price">₹69</span></div>
+      <div class="mitem"><span class="mi-name">Litchi Italian Cola</span><span class="mi-price">₹69</span></div>
+      <div class="mitem"><span class="mi-name">Bubblegum Italian Cola</span><span class="mi-price">₹69</span></div>
+      <div class="mitem"><span class="mi-name">Ice Cream Shooter</span><span class="mi-price">₹89</span></div>
+      <div class="mitem"><span class="mi-name">Java Chip Frappe</span><span class="mi-price">₹129</span></div>
+      <div class="mitem"><span class="mi-name">Sakura Rose Frappe</span><span class="mi-price">₹129</span></div>
+      <div class="mitem"><span class="mi-name">Black Currant Frappe</span><span class="mi-price">₹129</span></div>
+    </div>
+    <div class="mpanel" id="p-desserts">
+      <div class="mitem"><span class="mi-name">Choco Lava</span><span class="mi-price">₹109</span></div>
+      <div class="mitem"><span class="mi-name">Walnut Brownie</span><span class="mi-price">₹90</span></div>
+      <div class="mitem"><span class="mi-name">Sizzling Brownie</span><span class="mi-price">₹150</span></div>
+      <div class="mitem"><span class="mi-name">Chocolate Waffle</span><span class="mi-price">₹80</span></div>
+      <div class="mitem"><span class="mi-name">Kit-Kat Waffle</span><span class="mi-price">₹100</span></div>
+      <div class="mitem"><span class="mi-name">Oreo Waffle</span><span class="mi-price">₹100</span></div>
+      <div class="mitem"><span class="mi-name">Cookie N Cream Waffle</span><span class="mi-price">₹110</span></div>
+      <div class="mitem"><span class="mi-name">Vanilla Waffle</span><span class="mi-price">₹100</span></div>
+      <div class="mitem"><span class="mi-name">Nutella Waffle</span><span class="mi-price">₹110</span></div>
+      <div class="mitem"><span class="mi-name">Bubblegum Waffle</span><span class="mi-price">₹110</span></div>
+    </div>
+    <div class="mno" id="mno">No dishes found. Try another keyword.</div>
+    <div class="menu-foot">100% Pure Vegetarian · All dishes freshly prepared in our kitchen</div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section class="gallery-sec section" id="gallery">
+  <div class="wrap">
+    <div class="r">
+      <div class="eyebrow">Gallery</div>
+      <h2 class="headline">Food & <em>Vibes</em></h2>
+    </div>
+    <div class="gfilter">
+      <button class="gfbtn on" onclick="galFilter('all',this)">All</button>
+      <button class="gfbtn" onclick="galFilter('food',this)">Food</button>
+      <button class="gfbtn" onclick="galFilter('drinks',this)">Drinks</button>
+      <button class="gfbtn" onclick="galFilter('ambiance',this)">Ambiance</button>
+      <button class="gfbtn" onclick="galFilter('desserts',this)">Desserts</button>
+    </div>
+    <div class="ggrid" id="ggrid">
+      <div class="gi span2" data-cat="ambiance" data-src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=85" data-cap="The Blues Rooftop · Damoh">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Rooftop" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Ambiance</span><span class="go-name">Rooftop Dining</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+      <div class="gi span1" data-cat="food" data-src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900&q=85" data-cap="Signature Dish — Chef's Special">
+        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80" alt="Food" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Food</span><span class="go-name">Signature Dish</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+      <div class="gi span1" data-cat="drinks" data-src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=900&q=85" data-cap="Café Beverages · Cold Coffee">
+        <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=600&q=80" alt="Coffee" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Drinks</span><span class="go-name">Cold Coffee</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+      <div class="gi span1w" data-cat="food" data-src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=85" data-cap="Chef's Special Plating">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80" alt="Chef" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Food</span><span class="go-name">Chef's Special</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+      <div class="gi span1" data-cat="ambiance" data-src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85" data-cap="Evening Ambiance · The Blues">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Ambiance" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Ambiance</span><span class="go-name">Evening Vibes</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+      <div class="gi span1" data-cat="desserts" data-src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=85" data-cap="Desserts · Waffles & Brownies">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Dessert" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Desserts</span><span class="go-name">Sweet Endings</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+      <div class="gi span1" data-cat="food" data-src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=900&q=85" data-cap="Blues Special Pizza">
+        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&q=80" alt="Pizza" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Food</span><span class="go-name">Blues Pizza</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+      <div class="gi span1" data-cat="drinks" data-src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=900&q=85" data-cap="Shakes & Frappes">
+        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&q=80" alt="Shake" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Drinks</span><span class="go-name">Shakes & Frappes</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+      <div class="gi span1" data-cat="food" data-src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=85" data-cap="Artful Plating · Blues Kitchen">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Plating" loading="lazy">
+        <div class="gi-over"><span class="go-cat">Food</span><span class="go-name">Artful Plating</span></div>
+        <div class="gi-zoom">⤢</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOFTOP FEATURE -->
+<div class="rooftop">
+  <div class="rt-bg" id="rtBg"></div>
+  <div class="rt-over"></div>
+  <div class="rt-blue"></div>
+  <div class="rt-body r">
+    <div class="neon-tag">✦ Rooftop Experience · Damoh ✦</div>
+    <h2 class="rt-h2">Where the Sky<br>Meets the <em>Blues</em></h2>
+    <p class="rt-p">Open-air dining under the stars — neon lights, warm golden ambiance, city views, and food that makes you want to stay longer than you planned.</p>
+    <a href="#contact" class="btn-blue">Plan Your Visit →</a>
+  </div>
+</div>
+
+<!-- ═══ REVIEWS ═══ -->
+<section class="reviews-sec section" id="reviews">
+  <div class="wrap">
+    <div class="reviews-hdr">
+      <div class="r">
+        <div class="eyebrow">Customer Reviews</div>
+        <h2 class="headline">What People <em>Are Saying</em></h2>
+      </div>
+      <div class="gscore r">
+        <div class="g-logo"></div>
+        <div>
+          <div class="g-num">4.0</div>
+          <div class="g-stars">★★★★☆</div>
+          <div class="g-lbl">Based on Google Reviews · Damoh</div>
+        </div>
+      </div>
+    </div>
+    <div class="rgrid">
+      <div class="rcard r d1">
+        <div class="r-top"><div class="rav" style="background:#4285f4;">V</div><div><div class="rname">Vivek Kushwaha</div><div class="rdate">1 month ago · Google</div></div></div>
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">Amazing rooftop experience! The food presentation is stunning — beautifully plated with creative garnishing. The pasta and paneer dish were delicious. Cold coffee is a must try. The neon-lit ambiance is perfect for evenings.</p>
+        <div class="r-badge"><div class="r-dot"></div>Posted on Google</div>
+      </div>
+      <div class="rcard r d2">
+        <div class="r-top"><div class="rav" style="background:#ea4335;">T</div><div><div class="rname">Tashbeeya Khan</div><div class="rdate">10 months ago · Google</div></div></div>
+        <div class="r-stars">★★★★☆</div>
+        <p class="r-text">Visited with friends and had a great time! Ordered pizza, chilli paneer and a shake — all really good. Portions are generous and prices very reasonable. The rooftop is super Instagrammable!</p>
+        <div class="r-badge"><div class="r-dot"></div>Posted on Google</div>
+      </div>
+      <div class="rcard r d3">
+        <div class="r-top"><div class="rav" style="background:#34a853;">N</div><div><div class="rname">Nitin Singh Chouhan</div><div class="rdate">2 months ago · Google</div></div></div>
+        <div class="r-stars">★★★★☆</div>
+        <p class="r-text">The "This is Our Happy Place" neon sign rooftop is just too good. Perfect vibe for date nights or friend hangouts. Food is tasty and the staff is warm and polite. Definitely coming back!</p>
+        <div class="r-badge"><div class="r-dot"></div>Posted on Google</div>
+      </div>
+      <div class="rcard r d1">
+        <div class="r-top"><div class="rav" style="background:#fbbc05;">R</div><div><div class="rname">Rahul Mishra</div><div class="rdate">6 months ago · Google</div></div></div>
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">Best cafe in Damoh hands down! Rooftop ambiance at night with LED lighting is incredible. Tried the Maggi Sizzler and Korean Chilli Maggi — both excellent. Pure veg with so many options, truly impressed!</p>
+        <div class="r-badge"><div class="r-dot"></div>Posted on Google</div>
+      </div>
+      <div class="rcard r d2">
+        <div class="r-top"><div class="rav" style="background:#9c27b0;">P</div><div><div class="rname">Priya Sharma</div><div class="rdate">8 months ago · Google</div></div></div>
+        <div class="r-stars">★★★★☆</div>
+        <p class="r-text">Came for a birthday celebration — it was perfect. The sizzling brownie was the absolute highlight! Great service, food came hot and fast. The glass ceiling rooftop at night is gorgeous and unique for Damoh!</p>
+        <div class="r-badge"><div class="r-dot"></div>Posted on Google</div>
+      </div>
+      <div class="rcard r d3">
+        <div class="r-top"><div class="rav" style="background:#00bcd4;">A</div><div><div class="rname">Amit Kumar</div><div class="rdate">3 months ago · Google</div></div></div>
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">The Amritsari Kulcha combo is a steal at this price. Authentic taste, generous portions, and the rooftop makes everything better! Highly recommend for family dinners. 10/10 for ambiance and value!</p>
+        <div class="r-badge"><div class="r-dot"></div>Posted on Google</div>
+      </div>
+    </div>
+    <div class="review-write">
+      <a href="https://search.google.com/local/writereview?placeid=ChIJ_blues_cafe_damoh" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 48 48"><path d="M43.6 20.5H24v8h11.3C33.6 32.8 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.2 6.5 29.4 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.5 16.1 19 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.2 6.5 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.8 36 24 36c-5.2 0-9.5-3.2-11.3-7.7l-6.5 5C9.5 39.6 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.2 5.2C37.1 39 44 33.8 44 24c0-1.2-.1-2.4-.4-3.5z" fill="#1976D2"/></svg>
+        &nbsp;Write a Google Review
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact-sec section" id="contact">
+  <div class="wrap">
+    <div class="cgrid">
+      <div class="rl">
+        <div class="eyebrow">Find Us</div>
+        <h2 class="headline">Visit <em>The Blues</em></h2>
+        <div style="margin-top:2.5rem;">
+          <div class="irow"><div class="i-ico">📍</div><div class="i-body"><strong>Address</strong><p>Sharda Tower, Killai Road, Beside Vijay Nagar Gate,<br>Imalia, Damoh, Madhya Pradesh — 470661</p></div></div>
+          <div class="irow"><div class="i-ico">📞</div><div class="i-body"><strong>Phone & WhatsApp</strong><a href="tel:09202892954">092028 92954</a></div></div>
+          <div class="irow"><div class="i-ico">🕐</div><div class="i-body"><strong>Opening Hours</strong><p>Open Daily · Until 11:00 PM</p></div></div>
+          <div class="irow"><div class="i-ico">💰</div><div class="i-body"><strong>Price Range</strong><p>₹1 – ₹200 per person · Budget friendly</p></div></div>
+        </div>
+        <div class="contact-links">
+          <a href="https://wa.me/919202892954" target="_blank" class="c-link">💬 WhatsApp</a>
+          <a href="tel:09202892954" class="c-link">📞 Call</a>
+          <a href="https://www.zomato.com/damoh/the-blues-cafe-rooftop-damoh-locality" target="_blank" class="c-link">🍽 Zomato</a>
+          <a href="https://www.swiggy.com/city/damoh/the-blues-cafe-and-rooftop-vijay-nagar-rest1212108" target="_blank" class="c-link">🛵 Swiggy</a>
+        </div>
+      </div>
+      <div class="rr">
+        <div class="map-box">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3634.0!2d79.4431!3d23.8326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sThe+Blues+Cafe+Rooftop+Damoh!5e0!3m2!1sen!2sin!4v1700000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="The Blues Cafe"></iframe>
+          <div class="map-bar">
+            <span><b>The Blues Cafe & Rooftop</b> · Damoh, MP 470661</span>
+            <a href="https://maps.google.com/?q=The+Blues+Cafe+Rooftop+Killai+Road+Damoh" target="_blank" class="map-dir">Directions →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">B</div>
+        The <em>&nbsp;Blues&nbsp;</em> Cafe'
+      </div>
+      <p>Damoh's finest pure veg rooftop dining. Where great food meets open skies. Open till 11 PM daily.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <a href="#about">About Us</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Order Online</h4>
+      <a href="https://www.swiggy.com/city/damoh/the-blues-cafe-and-rooftop-vijay-nagar-rest1212108" target="_blank">Swiggy</a>
+      <a href="https://www.zomato.com/damoh/the-blues-cafe-rooftop-damoh-locality" target="_blank">Zomato</a>
+      <a href="https://wa.me/919202892954" target="_blank">WhatsApp Order</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:09202892954">092028 92954</a>
+      <a href="https://wa.me/919202892954" target="_blank">WhatsApp</a>
+      <p>Sharda Tower, Killai Rd</p>
+      <p>Damoh, MP — 470661</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 The Blues Cafe & Rooftop · Damoh, Madhya Pradesh</div>
+    <div class="footer-neon">Where the Sky Meets the Blues</div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/919202892954" class="wa" target="_blank" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</div><!-- #page -->
+
+<script>
+// ── FLOATING PARTICLES ──
+(function(){
+  const c=document.getElementById('particles');
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.bottom=Math.random()*20+'%';
+    p.style.setProperty('--dur',(6+Math.random()*10)+'s');
+    p.style.setProperty('--delay',(Math.random()*8)+'s');
+    p.style.setProperty('--dx',(Math.random()*60-30)+'px');
+    p.style.width=p.style.height=(1+Math.random()*2)+'px';
+    p.style.opacity=Math.random()*.5;
+    c.appendChild(p);
+  }
+})();
+
+// ── LOADER & PAGE SHOW ──
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('out');
+    document.getElementById('heroBg').classList.add('in');
+    document.getElementById('page').classList.add('show');
+  },2100);
+});
+
+// ── NAV SCROLL ──
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('stuck',window.scrollY>60);},{passive:true});
+
+// ── DRAWER ──
+function toggleDrawer(){
+  document.getElementById('ham').classList.toggle('x');
+  document.getElementById('drawer').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('drawer').classList.contains('open')?'hidden':'';
+}
+function closeDrawer(){
+  document.getElementById('ham').classList.remove('x');
+  document.getElementById('drawer').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ── SCROLL REVEAL ──
+const revs=document.querySelectorAll('.r,.rl,.rr');
+const ro=new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');ro.unobserve(e.target);}});},{threshold:.1});
+revs.forEach(el=>ro.observe(el));
+
+// ── MENU TABS ──
+function mTab(btn,id){
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.mpanel').forEach(p=>{p.classList.remove('on');p.style.display='';});
+  btn.classList.add('on');
+  document.getElementById(id).classList.add('on');
+  document.getElementById('msearch').value='';
+  document.getElementById('mno').style.display='none';
+  document.getElementById('mtabs').style.display='flex';
+}
+
+// ── MENU SEARCH ──
+function menuSearch(q){
+  q=q.trim().toLowerCase();
+  const tabs=document.getElementById('mtabs');
+  const mno=document.getElementById('mno');
+  if(!q){
+    tabs.style.display='flex';
+    document.querySelectorAll('.mpanel').forEach(p=>{p.classList.remove('on');p.style.display='';});
+    document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('on'));
+    document.querySelector('.mpanel').classList.add('on');
+    document.querySelector('.mtab').classList.add('on');
+    document.querySelectorAll('.mitem').forEach(i=>i.style.display='');
+    mno.style.display='none';return;
+  }
+  tabs.style.display='none';
+  document.querySelectorAll('.mpanel').forEach(p=>{p.classList.remove('on');p.style.display='none';});
+  let found=0;
+  document.querySelectorAll('.mpanel').forEach(panel=>{
+    let has=false;
+    panel.querySelectorAll('.mitem').forEach(item=>{
+      const m=item.querySelector('.mi-name').textContent.toLowerCase().includes(q);
+      item.style.display=m?'':'none';
+      if(m){has=true;found++;}
+    });
+    if(has){panel.classList.add('on');panel.style.display='grid';}
+  });
+  mno.style.display=found===0?'block':'none';
+}
+
+// ── GALLERY FILTER ──
+function galFilter(cat,btn){
+  document.querySelectorAll('.gfbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.gi').forEach(gi=>{
+    const show=cat==='all'||gi.dataset.cat===cat;
+    gi.style.display=show?'':'none';
+  });
+  buildLb();
+}
+
+// ── LIGHTBOX ──
+let lbArr=[],lbI=0;
+function buildLb(){lbArr=Array.from(document.querySelectorAll('.gi:not([style*="none"])'));}
+buildLb();
+document.querySelectorAll('.gi').forEach(gi=>{
+  gi.addEventListener('click',()=>{buildLb();lbI=lbArr.indexOf(gi);lbOpen(lbI);});
+});
+function lbOpen(i){
+  if(!lbArr.length)return;
+  lbI=(i+lbArr.length)%lbArr.length;
+  const gi=lbArr[lbI];
+  document.getElementById('lb-img').src=gi.dataset.src||gi.querySelector('img').src;
+  document.getElementById('lb-cap').textContent=gi.dataset.cap||'';
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function lbClose(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
+function lbGo(d){lbOpen(lbI+d);}
+document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)lbClose();});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('open'))return;
+  if(e.key==='Escape')lbClose();
+  if(e.key==='ArrowRight')lbGo(1);
+  if(e.key==='ArrowLeft')lbGo(-1);
+});
+
+// ── SMOOTH PARALLAX ──
+let ticking=false;
+window.addEventListener('scroll',()=>{
+  if(ticking)return;requestAnimationFrame(()=>{
+    const y=window.scrollY;
+    const hb=document.getElementById('heroBg');
+    if(hb)hb.style.transform=`scale(1) translateY(${y*.22}px)`;
+    const rb=document.getElementById('rtBg');
+    if(rb){
+      const top=rb.closest('.rooftop').getBoundingClientRect().top;
+      rb.style.transform=`scale(1.05) translateY(${-top*.14}px)`;
+    }
+    ticking=false;
+  });
+  ticking=true;
+},{passive:true});
+
+// ── ACTIVE NAV LINK ──
+const secs=document.querySelectorAll('section[id]');
+const nls=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-140)cur=s.id;});
+  nls.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+},{passive:true});
+</script>
+</body>
+</html>
